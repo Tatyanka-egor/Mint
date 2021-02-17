@@ -12,21 +12,22 @@
         android:id="@+id/imageView"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+        tools:srcCompat="@drawable/stelochka" />
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="170dp"
+        android:layout_height="60dp"
         android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.305"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@drawable/logotip" />
 
     <Button
         android:id="@+id/button"
