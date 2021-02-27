@@ -1,4 +1,4 @@
-package com.example.mint;
+package com.example.mint.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.NumberPicker;
+
+import com.example.mint.R;
 
 public class in_open extends AppCompatActivity {
 
@@ -20,7 +22,7 @@ public class in_open extends AppCompatActivity {
     }
 
     public void OnClickin(View view) {
-        Intent mainActivity =new Intent(in_open.this,MainActivity.class);
+        Intent mainActivity =new Intent(in_open.this, MainActivity.class);
         startActivity(mainActivity);
     }
 

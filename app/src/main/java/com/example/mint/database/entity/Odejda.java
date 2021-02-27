@@ -1,4 +1,4 @@
-package com.example.mint;
+package com.example.mint.database.entity;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
