@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 
+import com.example.mint.database.entity.Odejda;
 import com.example.mint.databinding.ActivityAddBinding;
 
 public class AddActivity extends AppCompatActivity {
@@ -27,13 +29,23 @@ public class AddActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                appData.loadImage(binding.photoTexturl.getText().toString(),binding.imageView2);
 
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                appData.loadImage(value.toString);
+
             }
         });
+        binding.butttonEdirOrAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Odejda odejda=new Odejda();
+                odejda.Title=binding.Nametv.getText().toString();
+            }
+        }){
+
+        }
     }
 }
