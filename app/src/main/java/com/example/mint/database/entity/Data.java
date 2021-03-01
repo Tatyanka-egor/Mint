@@ -16,20 +16,19 @@ import java.util.List;
 public class Data {
     private static Data instanse;
     public AppData data;
-    public RequestManager glade;
+     RequestManager glade;
 
     private Data(Context context){
         data= Room.databaseBuilder(context,AppData.class,"Magazin").allowMainThreadQueries().build();
+
     }
     public static Data getInstance(Context context){
         if (instanse==null)instanse=new Data(context);
         return instanse;
     }
 
-    public LiveData<List<Odejda>> GetAllOdejda(){
-        return data.odejdaDAO().getAll();
+    public LiveData<List<Odejda>> GetAllOdejda(){ return data.odejdaDAO().getAll(); }
 
-    }
     public static void loadImage(String url, ImageView view){
         glade.load(url).diskCacheStrategy(DiskCacheStrategy.ALL)
                 .placeholder(R.drawable.ic_launcher_foreground)

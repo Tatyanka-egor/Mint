@@ -2,8 +2,11 @@ package com.example.mint.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
+import androidx.room.RoomDatabase;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +14,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
+import com.example.mint.AddActivity;
 import com.example.mint.AppData;
 import com.example.mint.database.entity.Data;
 import com.example.mint.database.entity.Odejda;
@@ -28,9 +34,10 @@ public class MainActivity extends AppCompatActivity {
     OdejdaAdapter adapter;
     LayoutInflater inflater;
    ActivityMainBinding binding;
+RequestManager glide;
 
 
-
+AppData data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,8 +46,33 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         adapter=new OdejdaAdapter();
         binding.recyclerView.setAdapter(adapter);
+        glide=Glide.with(this);
+        data= Room.databaseBuilder(getApplicationContext(),AppData.class,
+                "DataBilder").build();
+
+        initOdejdaAdapter();
+        binding.addbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent activity_add=new Intent(MainActivity.this, AddActivity.class);
+                startActivity(activity_add);
+
+            }
+        });
 
 
+    }
+
+    private void initOdejdaAdapter() {
+        adapter=new OdejdaAdapter();
+        binding.recyclerView.setAdapter(adapter);
+        appData.odejdaDAO().getAll().observe(this, new Observer<List<Odejda>>() {
+            @Override
+            public void onChanged(List<Odejda> odejdas) {
+                meodejda=odejdas;
+                adapter.notifyDataSetChanged();
+            }
+        });
     }
 
     private class OdejdaAdapter extends RecyclerView.Adapter <OdejdaAdapter.ViewHolder>{
