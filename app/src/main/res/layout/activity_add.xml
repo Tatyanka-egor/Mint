@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddActivity">
+    android:background="@color/pink"
+    tools:context=".presentation.activities.edit.AddActivity">
+
     <ImageView
         android:id="@+id/imageView5"
         android:layout_width="170dp"
@@ -27,7 +29,7 @@
         tools:srcCompat="@drawable/backbotton" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/PicView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="108dp"
@@ -164,10 +166,33 @@
         android:layout_width="0dp"
         android:layout_height="30dp"
         android:layout_marginTop="16dp"
+        android:background="@color/white"
         android:text="фото"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/PicView" />
+
+    <Button
+        android:id="@+id/butttonEdit"
+        android:layout_width="139dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/bottonstile"
+        android:text="сохранить"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/delbut"
+        android:layout_width="47dp"
+        android:layout_height="49dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/ic_baseline_delete_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.012"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

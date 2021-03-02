@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/pink"
-    tools:context=".activities.MainProduct">
+    tools:context=".presentation.activities.MainProduct">
 
     <ImageView
         android:id="@+id/imageView5"
@@ -29,7 +29,7 @@
         tools:srcCompat="@drawable/backbotton" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/PicView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="108dp"
@@ -161,6 +161,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/PicView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,13 +1,12 @@
-package com.example.mint.activities;
+package com.example.mint.presentation.activities.main;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
-import androidx.room.RoomDatabase;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,13 +15,11 @@ import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
-import com.example.mint.AddActivity;
+import com.example.mint.presentation.activities.MainProduct;
+import com.example.mint.presentation.activities.edit.AddActivity;
 import com.example.mint.AppData;
-import com.example.mint.database.entity.Data;
-import com.example.mint.database.entity.Odejda;
-import com.example.mint.R;
+import com.example.mint.presentation.activities.database.entity.Odejda;
 import com.example.mint.databinding.ActivityMainBinding;
-import com.example.mint.databinding.ActivityMainProductBinding;
 import com.example.mint.databinding.ItemProductBinding;
 
 import java.util.ArrayList;
@@ -34,23 +31,21 @@ public class MainActivity extends AppCompatActivity {
     OdejdaAdapter adapter;
     LayoutInflater inflater;
    ActivityMainBinding binding;
-RequestManager glide;
 
 
-AppData data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         inflater=getLayoutInflater();
         binding=ActivityMainBinding.inflate(inflater);
         setContentView(binding.getRoot());
-        adapter=new OdejdaAdapter();
-        binding.recyclerView.setAdapter(adapter);
-        glide=Glide.with(this);
-        data= Room.databaseBuilder(getApplicationContext(),AppData.class,
-                "DataBilder").build();
 
-        initOdejdaAdapter();
+        appData=AppData.getInstance(getApplicationContext());
+        InitOdejdaAdapter();
+
+
+
+
         binding.addbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,15 +58,17 @@ AppData data;
 
     }
 
-    private void initOdejdaAdapter() {
+    private void InitOdejdaAdapter() {
         adapter=new OdejdaAdapter();
         binding.recyclerView.setAdapter(adapter);
-        appData.odejdaDAO().getAll().observe(this, new Observer<List<Odejda>>() {
+        appData.db.odejdaDAO().getAll().observe(this, new Observer<List<Odejda>>() {
             @Override
             public void onChanged(List<Odejda> odejdas) {
                 meodejda=odejdas;
                 adapter.notifyDataSetChanged();
-            }
+    }
+
+
         });
     }
 
@@ -83,18 +80,19 @@ AppData data;
         }
 
         @Override
-        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 
             final Odejda odejda=meodejda.get(position);
             holder.itemProductBinding.naming.setText(odejda.Title);
             holder.itemProductBinding.saletext.setText(odejda.Price);
-            Data.loadImage(odejda.Picture,holder.itemProductBinding.imageprod);
+            appData.loadImage(odejda.Picture,holder.itemProductBinding.imageprod);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(MainActivity.this,MainProduct.class);
-                    intent.putExtra("Id",odejda.OdejID);
-                     startActivity(intent);
+                    Intent MainProduct = new Intent(MainActivity.this, MainProduct.class);
+                    MainProduct.putExtra(AppData.ID,odejda.OdejID);
+                    ActivityOptions options=ActivityOptions.makeSceneTransitionAnimation(MainActivity.this,holder.itemProductBinding.imageprod,"trans");
+                     startActivity(MainProduct,options.toBundle());
                 }
             });
         }
@@ -105,10 +103,10 @@ AppData data;
         }
 
         public class ViewHolder extends RecyclerView.ViewHolder {
-           private ItemProductBinding itemProductBinding;
+            ItemProductBinding itemProductBinding;
            public ViewHolder(ItemProductBinding itemView){
                super(itemView.getRoot());
-               itemProductBinding=itemView;
+               this.itemProductBinding=itemView;
 
            }
         }

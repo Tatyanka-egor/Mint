@@ -1,4 +1,4 @@
-package com.example.mint.activities;
+package com.example.mint.presentation.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.NumberPicker;
 
 import com.example.mint.R;
+import com.example.mint.presentation.activities.main.MainActivity;
 
 public class in_open extends AppCompatActivity {
 
